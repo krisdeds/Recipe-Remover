@@ -1,0 +1,21 @@
+[
+{
+  "modid": "RecipeRemover",
+  "name": "Recipe Remover",
+  "description": "Removes recipes that use the vanilla crafting handler",
+  "version": "0.2",
+  "mcversion": "1.5.1",
+  "url": "",
+  "updateUrl": "",
+  "authors": [
+    "samrg472"
+  ],
+  "credits": "Created by samrg472",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
