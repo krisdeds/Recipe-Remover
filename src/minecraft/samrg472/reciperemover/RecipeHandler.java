@@ -5,11 +5,31 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RecipeHandler {
 
     private static final Map<Integer, ArrayList<Integer>> ids = new HashMap<Integer, ArrayList<Integer>>();
+
+    public static void addID(String s) {
+        try {
+            s = s.trim();
+            if (!s.contains(":")) {
+                RecipeHandler.addID(Integer.parseInt(s));
+                return;
+            }
+
+            String[] split = s.split(":");
+            int id = Integer.parseInt(split[0]);
+            int metadata = Integer.parseInt(split[1]);
+            RecipeHandler.addID(id, metadata);
+        } catch (NumberFormatException e) {
+            e.printStackTrace(System.err);
+        }
+    }
 
     public static void addID(int id) {
         addID(id, 0, false);
@@ -41,7 +61,7 @@ public class RecipeHandler {
         List recipes = CraftingManager.getInstance().getRecipeList();
         for (int i = 0; i < recipes.size(); i++) {
             ItemStack stack;
-            if ((stack = ((IRecipe)recipes.get(i)).getRecipeOutput()) == null) continue;
+            if ((stack = ((IRecipe) recipes.get(i)).getRecipeOutput()) == null) continue;
 
             int id = stack.itemID;
             if (!ids.containsKey(id)) continue;

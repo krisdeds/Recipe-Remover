@@ -25,17 +25,9 @@ public class ConfigurationHandler {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.trim().startsWith("#") || line.isEmpty()) continue;
-                lines.add(line.trim());
-
-                if (!line.contains(":")) {
-                    RecipeHandler.addID(Integer.parseInt(line.trim()));
-                    continue;
-                }
-
-                String[] split = line.split(":");
-                int id = Integer.parseInt(split[0]);
-                int metadata = Integer.parseInt(split[1]);
-                RecipeHandler.addID(id, metadata);
+                line = line.trim();
+                lines.add(line);
+                RecipeHandler.addID(line);
             }
             reader.close();
         } catch (IOException e) {

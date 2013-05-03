@@ -1,11 +1,9 @@
 package samrg472.reciperemover.network;
 
 import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import samrg472.reciperemover.ConfigurationHandler;
 import samrg472.reciperemover.RecipeHandler;
 import samrg472.reciperemover.RecipeRemover;
 
@@ -19,20 +17,10 @@ public class PacketHandler implements IPacketHandler {
         if (packet.data == null) return;
         DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
         try {
-            while (dis.available() != 0) {
-                String data = dis.readUTF();
-                if (!data.contains(":")) {
-                    RecipeHandler.addID(Integer.parseInt(data.trim()));
-                    continue;
-                }
-
-                String[] split = data.split(":");
-                int id = Integer.parseInt(split[0]);
-                int metadata = Integer.parseInt(split[1]);
-                RecipeHandler.addID(id, metadata);
-            }
-        } catch (IOException e) {
-            e.printStackTrace(System.err);
+            while (dis.available() != 0)
+                RecipeHandler.addID(dis.readUTF().trim());
+        } catch (Exception e) {
+            throw new RuntimeException(e); // Catch a major error
         }
         RecipeHandler.removeRecipes();
     }
