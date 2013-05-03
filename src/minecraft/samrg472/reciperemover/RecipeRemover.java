@@ -13,7 +13,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import samrg472.reciperemover.network.PacketHandler;
 
-@Mod(modid = RecipeRemover.MOD_ID, name = RecipeRemover.MOD_NAME, version = "0.2", useMetadata = false)
+@Mod(modid = RecipeRemover.MOD_ID, name = RecipeRemover.MOD_NAME, version = "0.3", useMetadata = false)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {RecipeRemover.CHANNEL}, packetHandler = PacketHandler.class)
 public class RecipeRemover {
 
